@@ -1,21 +1,32 @@
 package com.liyang;
 
+import com.liyang.filter.TestFilter;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-@RestController
-@EnableAutoConfiguration
+import java.util.ArrayList;
+import java.util.List;
+
+@SpringBootApplication
+@EnableScheduling
 public class Application {
 
-    @RequestMapping("/")
-    String home() {
-        return "Hello World!";
-    }
-    
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+    }
+
+    @Bean
+    public FilterRegistrationBean filterRegistrationBean() {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        List<String> urlPattern = new ArrayList<>();
+        TestFilter testFilter = new TestFilter();
+        urlPattern.add("/Blogs");
+        filterRegistrationBean.setFilter(testFilter);
+        filterRegistrationBean.setUrlPatterns(urlPattern);
+        return filterRegistrationBean;
     }
 
 }
