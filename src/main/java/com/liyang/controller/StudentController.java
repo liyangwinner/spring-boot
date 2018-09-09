@@ -15,13 +15,14 @@ public class StudentController {
 
     @RequestMapping("/getAllStudent")
     public List<Student> getAllStudent() {
-        return studentRepository.findAll();
+        List<Student> students = studentRepository.findAll();
+        return students;
     }
 
     @PostMapping("/addStudent")
-    public Student addStudent(@RequestParam("id") Integer id, @RequestParam("name") String name, @RequestParam("age") Integer age) {
+    public Student addStudent(@RequestParam("name") String name, @RequestParam("age") Integer age) {
         Student student = new Student();
-        student.setId(id);
+//        student.setId(id);
         student.setName(name);
         student.setAge(age);
         return studentRepository.save(student);
@@ -29,6 +30,8 @@ public class StudentController {
 
     @GetMapping("/getStudent/{id}")
     public Student getStudentById(@PathVariable("id") Integer id) {
+        Student student = studentRepository.getOne(id);
+        System.out.println("name ：" + student.getName());
         return studentRepository.getOne(id);
     }
 }
