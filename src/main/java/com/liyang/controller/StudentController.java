@@ -34,4 +34,9 @@ public class StudentController {
         System.out.println("name ：" + student.getName());
         return studentRepository.getOne(id);
     }
+
+    @GetMapping("/getStudentByName/{name}")
+    public List<Student> getStudentByName(@PathVariable("name") String name) {
+        return studentRepository.getByName(name);
+    }
 }
