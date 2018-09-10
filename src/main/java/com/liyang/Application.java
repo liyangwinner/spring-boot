@@ -1,6 +1,7 @@
 package com.liyang;
 
 import com.liyang.filter.TestFilter;
+import com.liyang.utils.VelocityUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -16,6 +17,8 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+        // test velocity
+        VelocityUtil.getVelocity();
     }
 
     @Bean
